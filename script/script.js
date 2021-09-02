@@ -8,23 +8,28 @@ function loadBook() {
         .then(res => res.json())
         .then(books => showBook(books))
     searchInput.value = '';
+
 }
 
 const showBook = books => {
     console.log(books);
-    const booksArray = books.docs;
-    const bookGroup = document.getElementById("bookGroup")
-    booksArray.forEach(book => {
-        // create imgUrl
-        // console.log(book);
-        const imgUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
-        const bookTitle = book.title;
-        const div = document.createElement("div");
-        div.classList.add("col");
-        const authorName = book.author_name[0];
-        const publishYear = book.first_publish_year;
-        const publisher = book.publisher[0];
-        div.innerHTML = `
+    if (books.docs.length == 0) {
+        const resultCount = document.getElementById("resultCount");
+            resultCount.innerText = `Total ${books.numFound} result found`;
+    } else {
+        const booksArray = books.docs;
+        const bookGroup = document.getElementById("bookGroup")
+        booksArray.forEach(book => {
+            // create imgUrl
+            // console.log(book);
+            const imgUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+            const bookTitle = book.title;
+            const div = document.createElement("div");
+            div.classList.add("col");
+            const authorName = book.author_name[0];
+            const publishYear = book.first_publish_year;
+            const publisher = book.publisher[0];
+            div.innerHTML = `
             <div class="card h-100">
                 <img src="${imgUrl}" class="card-img-top">
                 <div class="card-body">
@@ -37,8 +42,10 @@ const showBook = books => {
                 </div>
             </div>
       `
-        bookGroup.appendChild(div);
-        const resultCount = document.getElementById("resultCount");
-        resultCount.innerText = `Total ${books.numFound} result found and showing top 100 results`;
-    });
+            bookGroup.appendChild(div);
+            const resultCount = document.getElementById("resultCount");
+            resultCount.innerText = `Total ${books.numFound} result found and showing top 100 results`;
+        });
+    }
+
 }

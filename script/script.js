@@ -1,8 +1,8 @@
+// function for load book data
 function loadBook() {
     const searchInput = document.getElementById("searchInput");
     const searchInputValue = searchInput.value;
     const bookUrl = `https://openlibrary.org/search.json?q=${searchInputValue}`
-    console.log(bookUrl);
     // fetching api
     fetch(bookUrl)
         .then(res => res.json())
@@ -10,25 +10,26 @@ function loadBook() {
     searchInput.value = '';
 
 }
-
+// function for showing data on web
 const showBook = books => {
-    console.log(books);
-    if (books.docs.length == 0) {
+    // creating if else for error handling
+    if (books.docs.length === 0) {
         const resultCount = document.getElementById("resultCount");
-            resultCount.innerText = `Total ${books.numFound} result found`;
+        resultCount.innerText = `Total ${books.numFound} result found`;
     } else {
         const booksArray = books.docs;
         const bookGroup = document.getElementById("bookGroup")
         booksArray.forEach(book => {
             // create imgUrl
-            // console.log(book);
             const imgUrl = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+            // creating variable for title-author-publisher
             const bookTitle = book.title;
-            const div = document.createElement("div");
-            div.classList.add("col");
             const authorName = book.author_name[0];
             const publishYear = book.first_publish_year;
             const publisher = book.publisher[0];
+            // updating web
+            const div = document.createElement("div");
+            div.classList.add("col");
             div.innerHTML = `
             <div class="card h-100">
                 <img src="${imgUrl}" class="card-img-top">
@@ -42,6 +43,7 @@ const showBook = books => {
                 </div>
             </div>
       `
+    //   showing total result on web
             bookGroup.appendChild(div);
             const resultCount = document.getElementById("resultCount");
             resultCount.innerText = `Total ${books.numFound} result found and showing top 100 results`;

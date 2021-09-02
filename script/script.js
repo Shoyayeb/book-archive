@@ -14,9 +14,11 @@ function loadBook() {
 const showBook = books => {
     // creating if else for error handling
     if (books.docs.length === 0) {
+        // showing on web if no books found
         const resultCount = document.getElementById("resultCount");
         resultCount.innerText = `Total ${books.numFound} result found`;
     } else {
+        
         const booksArray = books.docs;
         const bookGroup = document.getElementById("bookGroup")
         booksArray.forEach(book => {

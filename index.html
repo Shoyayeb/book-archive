@@ -10,7 +10,7 @@
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-black bg-opacity-10">
     <div class="d-flex flex-column align-items-center">
         <h1 class="text-center ">Search for your book</h1>
     </div>
@@ -19,7 +19,11 @@
             aria-label="Search for your book" aria-describedby="searchBtn">
         <button class="btn btn-outline-success" type="button" onclick="loadBook()">Search</button>
     </div>
+    <h5 class="text-center text-black-50" id="resultCount"></h5>
     <hr class="w-75 mx-auto">
+
+    <div class="row row-cols-2 row-cols-md-4 g-4 w-75 mx-auto" id="bookGroup">
+        
     </div>
     <!-- javascript link -->
     <script src="./script/script.js"></script>
